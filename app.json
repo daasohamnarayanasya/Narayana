@@ -1,0 +1,12 @@
+{
+  "name": "Narayana",
+  "displayName": "Narayana",
+  "expo": {
+    "name": "Narayana",
+    "slug": "Narayana",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
