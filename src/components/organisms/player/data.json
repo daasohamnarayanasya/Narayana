@@ -1,0 +1,34 @@
+[
+  {
+    "id":"a",
+    "url":"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "title":"Narayana",
+    "artist":"Narayana",
+    "album":"Narayana",
+    "genre":"Narayana",
+    "date":"2014-05-20T07:00:00+00:00",
+    "artwork": "http://example.com/avaritia.png"
+  },
+  {
+    "id":"b",
+    "url":"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "title":"Narayana",
+    "artist":"Narayana",
+    "album":"Narayana",
+    "genre":"Narayana",
+    "date":"2014-05-20T07:00:00+00:00",
+    "artwork": "http://example.com/avaritia.png"
+  },
+  {
+    "id":"c",
+    "url":"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "title":"Narayana",
+    "artist":"Narayana",
+    "album":"Narayana",
+    "genre":"Narayana",
+    "date":"2014-05-20T07:00:00+00:00",
+    "artwork": "http://example.com/avaritia.png"
+  }
+]
+
+  

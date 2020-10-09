@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
       resizeMode:'cover'
    },
    title: {
-      color: '#ff512f',
-      fontSize: 60,
-      fontWeight:'bold'
+         fontFamily: 'Josefin Slab SemiBold',
+         color: 'black',
+         fontSize: 60
    }
 });

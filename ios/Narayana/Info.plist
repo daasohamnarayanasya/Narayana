@@ -55,5 +55,9 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Josefin Slab SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>

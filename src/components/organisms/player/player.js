@@ -3,19 +3,51 @@ import { ScrollView,StyleSheet, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import TrackPlayer from 'react-native-track-player';
+const colors = require('./colors.json');
+const songs = require('./data.json');
 
 export default class Player extends React.Component {
 
+   
+
    constructor(props) {
       super(props);
+
       this.state = {
+        colors:JSON.parse(JSON.stringify(colors)),
+        songs:JSON.parse(JSON.stringify(songs)),
         gestureName: 'none',
+        paused: false,
+        gradientColors:[],
+        colorIndex: 0,
         backgroundColor: '#fff'
       };
    }
 
+   
+   componentDidMount() {
+      this.setState({gradientColors:this.state.colors[0]});
+      TrackPlayer.setupPlayer().then(() => {
+         TrackPlayer.add(this.state.songs).then(()=> {
+            TrackPlayer.play();
+         });
+     });
+   }
+
+   pausePlayTrack() {
+      if(!this.state.paused) {
+         this.setState({paused:true});
+         TrackPlayer.pause();
+      } else {
+         this.setState({paused:false});
+         TrackPlayer.play();
+      }
+   }
+
    onSwipeUp(gestureState) {
    this.setState({myText: 'up'});
+   this.pausePlayTrack();
    }
 
    onSwipeDown(gestureState) {
@@ -23,15 +55,19 @@ export default class Player extends React.Component {
    }
 
    onSwipeLeft(gestureState) {
-   this.setState({myText: 'left'});
+   this.setState({myText: 'left',colorIndex:this.state.colorIndex<this.state.colors.length-1?this.state.colorIndex+1:0});
+   this.setState({gradientColors: this.state.colors[this.state.colorIndex]});
+   TrackPlayer.skipToPrevious().then(()=>{},()=>{console.log("Promise Error")});
    }
 
+
    onSwipeRight(gestureState) {
-   this.setState({myText: 'right'});
+   this.setState({myText: 'right',colorIndex:this.state.colorIndex>0?this.state.colorIndex-1:this.state.colors.length-1});
+   this.setState({gradientColors: this.state.colors[this.state.colorIndex]});
+   TrackPlayer.skipToNext().then(()=>{},()=>{console.log("Promise Error")});;
    }
 
    onSwipe(gestureName, gestureState) {
-      console.log("Sdf"+JSON.stringify(gestureName));
       const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
       this.setState({gestureName: gestureName});
       switch (gestureName) {
@@ -81,7 +117,7 @@ export default class Player extends React.Component {
          >
             <Animatable.View
                animation="fadeIn"
-               easing="ease-out-sine" 
+               easing="ease-in-sine" 
                iterationCount={1}
                duration={1000}
                direction="alternate" 
@@ -90,7 +126,7 @@ export default class Player extends React.Component {
                   resizeMode:'cover'
                }}>
                <LinearGradient            
-                  colors={["#02aab0","#00cdac"]}
+                  colors={this.state.gradientColors}
                   start={{x: 0, y: 0}} 
                   end={{x: 1, y: 1}}
                   style={{
@@ -124,8 +160,8 @@ const styles = StyleSheet.create({
       resizeMode:'cover'
    },
    title: {
-      color: '#ff512f',
-      fontSize: 60,
-      fontWeight:'bold'
+      fontFamily: 'Josefin Slab SemiBold',
+      color: 'black',
+      fontSize: 60
    }
 });
